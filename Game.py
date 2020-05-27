@@ -5,6 +5,7 @@ from Candy import Candy
 from Player import Player
 from DizzyCandy import DizzyCandy
 from Wall import Wall
+import os
 
 
 class Game:
@@ -36,7 +37,6 @@ class Game:
 
                 else:
                     print('.', end=' ')
-
             print()
 
     # Fait apparaitre un bonbon
@@ -85,6 +85,10 @@ class Game:
         now = datetime.datetime.today()
         while now < self.end_time:
             for player in Player.registered_players:
+                if os.name == 'nt':
+                    os.system('cls')
+                else:
+                    os.system('clear')
                 print("C'est au tour de", player.name)
                 self.draw()
 
@@ -99,8 +103,7 @@ class Game:
                 self.draw()
 
             now = datetime.datetime.today()
-
-            print("----- Terminé -----")
+        print("----- Terminé -----")
         print(Player.get_best_score())
 
     # Mise en pause
